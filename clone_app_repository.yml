@@ -1,0 +1,15 @@
+---
+
+- hosts: all
+  become: true
+  vars:
+    app_repo_url: "https://github.com/toleX9/apache.yml.git"
+    app_destination: "/var/www/app"
+  tasks:
+    - name: Clone app repository
+      tags:
+        - git
+      git:
+        repo: "{{ app_repo_url }}"
+        dest: "{{ app_destination }}"
+

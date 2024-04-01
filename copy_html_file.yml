@@ -1,0 +1,14 @@
+---
+- hosts: all
+  tasks:
+    - name: Copy HTML file for site
+      tags:
+        - apache
+        - apache2
+        - httpd
+      copy:
+        src: /home/ubuntu/ansible/default_site.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: 0644

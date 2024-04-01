@@ -1,0 +1,25 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+    - name: install apache2 package
+      tags:
+      -   apache
+      -   centos
+      -   httpd
+      package:
+        name: "{{ 'apache2' if ansible_distribution == 'Ubuntu' else 'httpd' }}"
+
+    - name: start and enable httpd (centos)
+      tags:
+      -   apache
+      -   centos
+      -   httpd
+      systemd:
+        name: "{{ 'apache2' if ansible_distribution == 'Ubuntu' else 'httpd' }}"
+        state: started
+        enabled: yes
+      when: ansible_distribution == "centos"
+
+

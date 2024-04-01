@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Install Git on Ubuntu
+      tags:
+        - git
+      apt:
+        name: git
+        state: present
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Install Git on CentOS
+      tags:
+        - git
+      yum:
+        name: git
+        state: present
+      when: ansible_distribution == "CentOS"
